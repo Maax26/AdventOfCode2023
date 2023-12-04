@@ -4,7 +4,8 @@ _COLORS = {
     "blue": 14,
 }
 
-if __name__ == "__main__":
+
+def main():
     # inputs = open("test_input.txt")
     inputs = open("input.txt")
 
@@ -26,3 +27,7 @@ if __name__ == "__main__":
             total_sum += game_n
 
     print(total_sum)
+
+
+if __name__ == "__main__":
+    main()

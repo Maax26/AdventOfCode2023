@@ -7,6 +7,7 @@ def _make_schematic(inputs):
             schematic[i].append(col)
     return schematic
 
+
 def _find_gear_neighbor(schematic, row, col):
     n_rows = len(schematic)
     n_cols = len(schematic[0])
@@ -54,7 +55,6 @@ def main():
             total_sum += int(values[0]) * int(values[1])
 
     print(total_sum)
-
 
 
 if __name__ == "__main__":
