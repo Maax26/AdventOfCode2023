@@ -1,11 +1,11 @@
 def main():
-    inputs = open("test_input.txt")
-    # inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     times_str = inputs.readline().split()[1:]
-    times = [eval(i) for i in times_str]
+    times = [int(i) for i in times_str]
     distance_str = inputs.readline().split()[1:]
-    distance = [eval(i) for i in distance_str]
+    distance = [int(i) for i in distance_str]
 
     table = list(zip(times, distance))
 
