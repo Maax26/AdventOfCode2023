@@ -16,9 +16,10 @@ def _get_first_digit(line):
     for i, c in enumerate(line):
         if c.isdigit():
             return c
-        for digit in _DIGITS.keys():
-            if digit in line[i:i + len(digit)]:
-                return _DIGITS[digit]
+        for digit, value in _DIGITS.items():
+            if digit in line[i : i + len(digit)]:
+                return value
+    return ""
 
 
 def _get_last_digit(line):
@@ -26,14 +27,15 @@ def _get_last_digit(line):
     for i, c in enumerate(line_reversed):
         if c.isdigit():
             return c
-        for digit in _DIGITS.keys():
-            if digit[::-1] in line_reversed[i:i + len(digit)]:
-                return _DIGITS[digit]
+        for digit, value in _DIGITS.items():
+            if digit[::-1] in line_reversed[i : i + len(digit)]:
+                return value
+    return ""
 
 
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     total_sum = 0
     for line in inputs:

@@ -2,7 +2,7 @@ def main():
     inputs = open("test_input.txt")
     # inputs = open("input.txt")
 
-    times_str = (inputs.readline().split()[1:])
+    times_str = inputs.readline().split()[1:]
     times = [eval(i) for i in times_str]
     distance_str = inputs.readline().split()[1:]
     distance = [eval(i) for i in distance_str]
@@ -13,7 +13,7 @@ def main():
     for time, distance in table:
         wins_per_round = 0
         for time_pressed in range(time):
-            travelled_distance = time_pressed*(time-time_pressed)
+            travelled_distance = time_pressed * (time - time_pressed)
             if travelled_distance > distance:
                 wins_per_round += 1
         if not margin_of_errors:
@@ -26,4 +26,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

@@ -8,7 +8,6 @@ def main():
         inputs.readline()
         for instruction in instructions:
             while next_tile != current_tile:
-                if inputs.
                 current_tile, mapping = inputs.readline().split(" = (")
 
             left, right = mapping.strip()[:-1].split(", ")

@@ -16,7 +16,7 @@ def main():
         your_winning_numbers = set(your_numbers).intersection(winning_numbers)
 
         for j in range(len(your_winning_numbers)):
-            card_instances[i+1+j] += card_instances[i]
+            card_instances[i + 1 + j] += card_instances[i]
 
     print(sum(card_instances.values()))
 

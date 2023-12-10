@@ -4,7 +4,7 @@ def _make_schematic(inputs):
         row = row.strip()
         schematic.append([])
         for j, col in enumerate(row):
-            schematic[i].append(col)
+            schematic[j].append(col)
     return schematic
 
 
@@ -21,8 +21,8 @@ def _has_part_neighbor(schematic, row, col):
 
 
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     schematic = _make_schematic(inputs)
 

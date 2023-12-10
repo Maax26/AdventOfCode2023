@@ -99,42 +99,76 @@ def _identify_hand(hand):
     return _HIGH_CARD
 
 
-def _insertion_sort(category, hand, bid):
-    items = list(category)
-    for key, value in category.items():
-        for i in range(5):
-            if _RANKS[hand[i]] > _RANKS[key[i]]:
-                temp = (key, value)
-                items.insert(key.index(), (hand, bid))
-                items.insert(key.index()+1, temp)
-    if not category.items():
-        items.insert(0, (hand, bid))
-
-    category = dict(items)
+def _insert_hand_is_greater(current_hand, insert_hand):
+    for i in range(len(current_hand)):
+        if _RANKS[insert_hand[i]] == _RANKS[current_hand[i]]:
+            continue
+        return _RANKS[insert_hand[i]] > _RANKS[current_hand[i]]
 
 
+def _sorted_insert(category, hand, bid):
+    n = len(category)
+
+    if n == 0:
+        category.append((hand, bid))
+        return category
+    if n == 1:
+        if _insert_hand_is_greater(category[0][0], hand):
+            category.append((hand, bid))
+        else:
+            temp_val = category.pop()
+            category.append((hand, bid))
+            category.append(temp_val)
+        return category
+
+    i = 0
+    while i < n and _insert_hand_is_greater(
+        category[i][0], hand
+    ):  # value >= sorted_list[i]:
+        i += 1
+
+    if i >= n:
+        category.append((hand, bid))
+        return category
+    else:
+        new_list = category[:i]
+        list_end = category[i:]
+        new_list.append((hand, bid))
+        for value in list_end:
+            new_list.append(value)
+        return new_list
 
 
 def main():
-    inputs = open("test_input.txt")
+    # inputs = open("test_input.txt")
+    inputs = open("input.txt")
 
     ordered_hands = {
-        _FIVE_OF_A_KIND: {},
-        _FOUR_OF_A_KIND: {},
-        _FULL_HOUSE: {},
-        _THREE_OF_A_KIND: {},
-        _TWO_PAIR: {},
-        _ONE_PAIR: {},
-        _HIGH_CARD: {},
+        _HIGH_CARD: [],
+        _ONE_PAIR: [],
+        _TWO_PAIR: [],
+        _THREE_OF_A_KIND: [],
+        _FULL_HOUSE: [],
+        _FOUR_OF_A_KIND: [],
+        _FIVE_OF_A_KIND: [],
     }
 
     for line in inputs:
         hand, bid = line.strip().split()
-        ordered_hands[_identify_hand(hand)][hand] = bid
-        # _insertion_sort(ordered_hands[_identify_hand(hand)], hand, bid)
+        hand_category = _identify_hand(hand)
+        ordered_hands[hand_category] = _sorted_insert(
+            ordered_hands[hand_category], hand, bid
+        )
 
-    import json
-    print(json.dumps(ordered_hands, indent=4))
+    current_rank = 1
+    total_winnings = 0
+    for category, hands in ordered_hands.items():
+        for _, bid in hands:
+            winnings = int(bid) * current_rank
+            total_winnings += winnings
+            current_rank += 1
+
+    print(total_winnings)
 
 
 if __name__ == "__main__":

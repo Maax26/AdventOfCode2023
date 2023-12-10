@@ -6,8 +6,8 @@ _COLORS = {
 
 
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     total_sum = 0
     for game in inputs:

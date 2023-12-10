@@ -28,11 +28,15 @@ def main():
             if next_category:
                 continue
 
-            destination_range_start, source_range_start, range_length = [int(n) for n in line.split()]
+            destination_range_start, source_range_start, range_length = [
+                int(n) for n in line.split()
+            ]
 
             # If the current line in the input is affecting the mapping of the current location.
             if source_range_start <= current_place < source_range_start + range_length:
-                current_place = destination_range_start + (current_place - source_range_start)
+                current_place = destination_range_start + (
+                    current_place - source_range_start
+                )
                 next_category = True
             if "location" in current_category and current_place < minimum_place:
                 minimum_place = current_place

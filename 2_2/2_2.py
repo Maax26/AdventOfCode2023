@@ -1,12 +1,11 @@
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     total_sum = 0
     for game in inputs:
         game = game.strip()
-        game_str, all_sets = game.split(":")
-        game_n = int(game_str.split(" ")[1])
+        all_sets = game.split(":")[1]
 
         sets = all_sets.strip().split(";")
         max_colors = {

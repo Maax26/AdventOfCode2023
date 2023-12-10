@@ -10,7 +10,7 @@ def main():
         your_numbers = [y for y in your_numbers_str.strip().split(" ") if y]
 
         your_winning_numbers = set(your_numbers).intersection(winning_numbers)
-        total_points += int(2**(len(your_winning_numbers)-1))
+        total_points += int(2 ** (len(your_winning_numbers) - 1))
 
     print(total_points)
 

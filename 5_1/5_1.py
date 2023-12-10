@@ -30,7 +30,9 @@ def main():
         destination_range_start, source_range_start, range_length = line.split()
         for i in range(int(range_length)):
             # Updates the current categories array with the new value.
-            mapping[current_category][int(source_range_start)+i] = int(destination_range_start) + i
+            mapping[current_category][int(source_range_start) + i] = (
+                int(destination_range_start) + i
+            )
 
     minimum_location_number = 100
     # Now that all mappings has been updated, go through all seeds.

@@ -1,0 +1,17 @@
+[MESSAGES CONTROL]
+disable=missing-module-docstring,
+    missing-function-docstring,
+    missing-class-docstring,
+    invalid-name,
+    consider-using-with,
+    too-few-public-methods,
+    too-many-instance-attributes,
+    too-many-arguments,
+    no-member,
+    broad-except,
+    global-statement,
+    R0801, ;Similar lines in 2 files
+    fixme,
+
+[FORMAT]
+max-line-length=103
