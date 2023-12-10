@@ -1,4 +1,4 @@
-from collections import Counter, defaultdict
+from collections import Counter
 
 _RANKS = {
     "2": 1,
@@ -26,7 +26,7 @@ _HIGH_CARD = "high_card"
 
 
 def _five_of_a_kind(hand):
-    card_counter = Counter([card for card in hand])
+    card_counter = Counter(list(hand))
     for card in hand:
         if card_counter[card] == 5:
             return True
@@ -34,7 +34,7 @@ def _five_of_a_kind(hand):
 
 
 def _four_of_a_kind(hand):
-    card_counter = Counter([card for card in hand])
+    card_counter = Counter(list(hand))
     for card in hand:
         if card_counter[card] == 4:
             return True
@@ -42,14 +42,14 @@ def _four_of_a_kind(hand):
 
 
 def _full_house(hand):
-    card_counter = Counter([card for card in hand])
+    card_counter = Counter(list(hand))
     if sorted(card_counter.values()) == [2, 3]:
         return True
     return False
 
 
 def _three_of_a_kind(hand):
-    card_counter = Counter([card for card in hand])
+    card_counter = Counter(list(hand))
     for card in hand:
         if card_counter[card] == 3:
             return True
@@ -59,7 +59,7 @@ def _three_of_a_kind(hand):
 def _pair(hand):
     one_pair = False
     two_pair = False
-    card_counter = Counter([card for card in hand])
+    card_counter = Counter(list(hand))
     for counter in card_counter.values():
         if counter == 2:
             if not one_pair:
@@ -78,32 +78,28 @@ def _one_pair(hand):
 
 
 def _identify_hand(hand):
+    hand_category = _HIGH_CARD
     if _five_of_a_kind(hand):
-        return _FIVE_OF_A_KIND
+        hand_category = _FIVE_OF_A_KIND
+    elif _four_of_a_kind(hand):
+        hand_category = _FOUR_OF_A_KIND
+    elif _full_house(hand):
+        hand_category = _FULL_HOUSE
+    elif _three_of_a_kind(hand):
+        hand_category = _THREE_OF_A_KIND
+    elif _two_pair(hand):
+        hand_category = _TWO_PAIR
+    elif _one_pair(hand):
+        hand_category = _ONE_PAIR
 
-    if _four_of_a_kind(hand):
-        return _FOUR_OF_A_KIND
-
-    if _full_house(hand):
-        return _FULL_HOUSE
-
-    if _three_of_a_kind(hand):
-        return _THREE_OF_A_KIND
-
-    if _two_pair(hand):
-        return _TWO_PAIR
-
-    if _one_pair(hand):
-        return _ONE_PAIR
-
-    return _HIGH_CARD
+    return hand_category
 
 
 def _insert_hand_is_greater(current_hand, insert_hand):
-    for i in range(len(current_hand)):
-        if _RANKS[insert_hand[i]] == _RANKS[current_hand[i]]:
+    for i, current_card in enumerate(current_hand):
+        if _RANKS[insert_hand[i]] == _RANKS[current_card]:
             continue
-        return _RANKS[insert_hand[i]] > _RANKS[current_hand[i]]
+        return _RANKS[insert_hand[i]] > _RANKS[current_card]
 
 
 def _sorted_insert(category, hand, bid):
@@ -130,18 +126,18 @@ def _sorted_insert(category, hand, bid):
     if i >= n:
         category.append((hand, bid))
         return category
-    else:
-        new_list = category[:i]
-        list_end = category[i:]
-        new_list.append((hand, bid))
-        for value in list_end:
-            new_list.append(value)
-        return new_list
+
+    new_list = category[:i]
+    list_end = category[i:]
+    new_list.append((hand, bid))
+    for value in list_end:
+        new_list.append(value)
+    return new_list
 
 
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     ordered_hands = {
         _HIGH_CARD: [],
@@ -162,7 +158,7 @@ def main():
 
     current_rank = 1
     total_winnings = 0
-    for category, hands in ordered_hands.items():
+    for hands in ordered_hands.values():
         for _, bid in hands:
             winnings = int(bid) * current_rank
             total_winnings += winnings
