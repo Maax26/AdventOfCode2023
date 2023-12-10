@@ -3,8 +3,8 @@ def _make_schematic(inputs):
     for i, row in enumerate(inputs):
         row = row.strip()
         schematic.append([])
-        for j, col in enumerate(row):
-            schematic[j].append(col)
+        for col in row:
+            schematic[i].append(col)
     return schematic
 
 
@@ -27,12 +27,12 @@ def main():
     schematic = _make_schematic(inputs)
 
     total_sum = 0
-    for i in range(len(schematic)):
+    for i, row in enumerate(schematic):
         current_number_str = ""
         is_part = False
-        for j in range(len(schematic)):
-            if schematic[i][j].isdigit():
-                current_number_str += schematic[i][j]
+        for j, col in enumerate(row):
+            if col.isdigit():
+                current_number_str += col
                 if not is_part:
                     is_part = _has_part_neighbor(schematic, i, j)
             else:
