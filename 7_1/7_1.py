@@ -118,9 +118,7 @@ def _sorted_insert(category, hand, bid):
         return category
 
     i = 0
-    while i < n and _insert_hand_is_greater(
-        category[i][0], hand
-    ):  # value >= sorted_list[i]:
+    while i < n and _insert_hand_is_greater(category[i][0], hand):
         i += 1
 
     if i >= n:
