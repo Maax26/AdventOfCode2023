@@ -1,6 +1,6 @@
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     times = inputs.readline().split()[1:]
     time = int("".join(times))
