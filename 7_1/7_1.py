@@ -158,8 +158,7 @@ def main():
     total_winnings = 0
     for hands in ordered_hands.values():
         for _, bid in hands:
-            winnings = int(bid) * current_rank
-            total_winnings += winnings
+            total_winnings += int(bid) * current_rank
             current_rank += 1
 
     print(total_winnings)
