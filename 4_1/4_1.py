@@ -1,10 +1,10 @@
 def main():
-    # inputs = open("test_input.txt")
-    inputs = open("input.txt")
+    # inputs = open("test_input.txt", encoding="utf-8")
+    inputs = open("input.txt", encoding="utf-8")
 
     total_points = 0
     for card in inputs:
-        card_str, numbers_str = card.strip().split(":")
+        numbers_str = card.strip().split(":")[1]
         winning_numbers_str, your_numbers_str = numbers_str.strip().split("|")
         winning_numbers = [w for w in winning_numbers_str.strip().split(" ") if w]
         your_numbers = [y for y in your_numbers_str.strip().split(" ") if y]
